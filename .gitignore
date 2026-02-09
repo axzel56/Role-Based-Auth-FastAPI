@@ -14,36 +14,12 @@ venv.bak/
 .env
 .env.*
 
-# SQLAlchemy / database files (if using SQLite for dev/testing)
-*.db
-*.sqlite3
-
-# Alembic / migration caches
-migrations/__pycache__/
-migrations/*.pyc
-
 # Logs
 *.log
 
 # IDE/editor files
 .vscode/
-.idea/
-*.sublime-project
-*.sublime-workspace
-*.swp
-*.swo
-*.bak
-*.orig
 
-# Pytest / coverage
-.pytest_cache/
-.coverage
-.coverage.*
-htmlcov/
-nosetests.xml
-coverage.xml
-*.cover
-.hypothesis/
 
 # OS-specific
 .DS_Store
