@@ -33,6 +33,7 @@ def signup(
     service = AuthService(db)
     return service.signup(data)
 
+
 @router.post(
     "/login",
     response_model=TokenResponse

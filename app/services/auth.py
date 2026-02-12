@@ -6,6 +6,8 @@ from app.repositories.user import UserRepository
 from app.schemas.user import UserCreate
 from app.utils.hashing import PasswordHasher
 from app.core.security import JWTService
+import email_validator
+
 
 class AuthService:
     
@@ -15,7 +17,9 @@ class AuthService:
         
     
     def signup(self, data:UserCreate) -> User:
+        email_validator(data.email)
         existing_user = self.user_repo.get_by_email(data.email)
+        
         if existing_user :
             raise HTTPException(
                 status_code = status.HTTP_400_BAD_REQUEST,
@@ -34,6 +38,7 @@ class AuthService:
         return self.user_repo.create(user)
     
     def login(self, email: str, password: str) -> dict:
+        email_validator(email)
         user = self.user_repo.get_by_email(email)
         if not user:
             raise HTTPException(
@@ -56,7 +61,7 @@ class AuthService:
         return {
             "access_token" : access_token,
             "token_type" : "bearer",
-            "message" :  "Welcome!" if user.role.name == "admin" else "Welcome Non Admin"
+            "message" :  "Welcome!" if user.roles.name == "admin" else "Welcome Non Admin"
         }
         
         

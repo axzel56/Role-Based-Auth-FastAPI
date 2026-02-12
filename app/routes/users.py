@@ -21,12 +21,11 @@ def get_non_admin(db: Session = Depends(get_db)):
 def admin_dashboard(user= Depends(admin_only), admins=Depends(get_admin_user), non_admins= Depends(get_non_admin)):
     # print(get_admin_user())
     return {
-        
         "admins" : [u.email for u in admins],
         "non-admins" : [u.email for u in non_admins],
         "message": f"Welcome admin {user.email}"
     }
-    
+    # oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/token")
     
 @router.get("/me")
 def read_me(user=Depends(user_or_admin)):

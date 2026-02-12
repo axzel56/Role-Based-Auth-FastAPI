@@ -10,6 +10,7 @@ class JWTService:
             minutes=ACCESS_TOKEN_EXPIRE_MINUTES
         )
         to_encode.update({"exp": expire})
+        print("JWT", jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITM))
         return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITM)
     
     

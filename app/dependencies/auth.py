@@ -13,6 +13,7 @@ def get_current_user(
     token: str = Depends(oauth2_scheme),
     db: Session = Depends(get_db)
 ):
+    print('Token', token)
     payload = JWTService.decode_token(token)
     
     if not payload:
@@ -43,6 +44,7 @@ class RoleChecker:
         self.allowed_roles = allowed_roles
         
     def __call__(self, user=Depends(get_current_user)):
+        
         if user.role.name not in self.allowed_roles:
             raise HTTPException(
                 status_code=status.HTTP_403_FORBIDDEN,
